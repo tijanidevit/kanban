@@ -26,6 +26,7 @@ class ColumnController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $cards = Column::with('cards')->get();

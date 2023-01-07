@@ -11,12 +11,31 @@ use Illuminate\Support\Arr;
 
 class CardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only('listCards');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        $cards = Card::all();
+        return $this->retrievedResponse($cards);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  String access_token
+     * optional @param created_at,status
+     * @return \Illuminate\Http\Response
+     */
+    public function listCards()
     {
         $cards = Card::all();
         return $this->retrievedResponse($cards);

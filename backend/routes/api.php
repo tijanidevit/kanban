@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ColumnController;
 use Illuminate\Http\Request;
@@ -30,6 +31,9 @@ Route::prefix('cards')->group(function () {
     Route::delete('/', [CardController::class, 'delete']);
 });
 
+
+
+Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
