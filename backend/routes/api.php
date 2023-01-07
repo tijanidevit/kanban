@@ -5,6 +5,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\ColumnController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Spatie\DbDumper\Databases\MySql;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,10 @@ Route::get('/list-cards', [CardController::class, 'listCards']);
 
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/dump-db', function () {
+    MySql::create()
+        ->setDbName(env('DB_DATABASE'))
+        ->setUserName(env('DB_USERNAME'))
+        ->setPassword(env('DB_PASSWORD'))
+        ->dumpToFile('dump.sql');
 });

@@ -35,10 +35,19 @@ class CardController extends Controller
      * optional @param created_at,status
      * @return \Illuminate\Http\Response
      */
-    public function listCards($access_token, $created_at = "", $status ="")
+    public function listCards(Request $request)
     {
+        $date = $request->input('date');
+        $status = $request->input('status');
         
-        $cards = Card::all();
+        $query = Card::query();
+        if ($date) {
+            $query->whereDate('created_at', $date);
+        }
+        if ($status !== null) {
+            $query->where('status', $status);
+        }
+        $cards = $query->get();
         return $this->retrievedResponse($cards);
     }
 
