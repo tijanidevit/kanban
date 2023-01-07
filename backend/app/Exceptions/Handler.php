@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Http\Traits\ResponseTrait;
+use BadMethodCallException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Throwable;
 

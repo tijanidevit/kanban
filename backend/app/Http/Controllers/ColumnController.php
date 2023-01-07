@@ -57,10 +57,10 @@ class ColumnController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $column = Column::findorFail($id);
-        $column->destroy();
+        $column = Column::findorFail($request->id);
+        $column->delete();
         return $this->deletedResponse();
     }
 }

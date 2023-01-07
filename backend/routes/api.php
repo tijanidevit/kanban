@@ -17,8 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::apiResource('columns', ColumnController::class)->only(['index','store','destroy']);
-Route::apiResource('cards', CardController::class);
+Route::apiResource('columns', ColumnController::class)->only(['index','store']);
+Route::prefix('columns')->group(function () {
+    Route::delete('/', [ColumnController::class, 'destroy']);
+});
+
+
+
+Route::apiResource('cards', CardController::class)->only(['store','index']);
+Route::prefix('cards')->group(function () {
+    Route::patch('/', [CardController::class, 'update']);
+    Route::delete('/', [CardController::class, 'delete']);
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

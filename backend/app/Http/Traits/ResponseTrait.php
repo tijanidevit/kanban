@@ -16,7 +16,7 @@ trait ResponseTrait {
     {
         return response([
             'success' => true,
-            'message' => "Resource retrieved successfully",
+            'message' => "Resource or Collection retrieved successfully",
             'data' => $data
         ], 200);
     }

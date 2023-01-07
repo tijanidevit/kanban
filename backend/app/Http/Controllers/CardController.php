@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Card\StoreRequest;
+use App\Http\Requests\Card\UpdateRequest;
 use App\Models\Card;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Arr;
 
 class CardController extends Controller
 {
@@ -29,18 +30,14 @@ class CardController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        try {
+            $data = Arr::only($request->validated(), ['title','column_id','description']);
+            Card::create($data);
+            return $this->createdResponse();
+            
+        } catch (\Exception $ex) {
+            return $this->errorResponse($ex->getMessage(), 422);
+        }
     }
 
     /**
@@ -50,19 +47,35 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request)
     {
-        //
+        $id = $request->id;
+        $card = Card::findOrFail($id);
+
+        try {
+            $data = Arr::only($request->validated(), ['title','description']);
+            $card->update($data);
+            return $this->updatedResponse($card);
+            
+        } catch (\Exception $ex) {
+            return $this->errorResponse($ex->getMessage(), 422);
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Set status of the specified resource to 0.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        $id = $request->id;
+        $card = Card::findOrFail($id);
+        $card->status = '0';
+        $card->deleted_at = Carbon::now()->toDateTimeString();
+        $card->save();
+
+        return $this->successResponse("Card deleted successfully");
     }
 }
