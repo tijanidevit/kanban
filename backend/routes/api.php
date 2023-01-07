@@ -30,7 +30,7 @@ Route::prefix('cards')->group(function () {
     Route::patch('/', [CardController::class, 'update']);
     Route::delete('/', [CardController::class, 'delete']);
 });
-
+Route::get('/list-cards', [CardController::class, 'listCards']);
 
 
 Route::post('/login', [AuthController::class, 'login']);

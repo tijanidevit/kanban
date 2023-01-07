@@ -35,8 +35,9 @@ class CardController extends Controller
      * optional @param created_at,status
      * @return \Illuminate\Http\Response
      */
-    public function listCards()
+    public function listCards($access_token, $created_at = "", $status ="")
     {
+        
         $cards = Card::all();
         return $this->retrievedResponse($cards);
     }
