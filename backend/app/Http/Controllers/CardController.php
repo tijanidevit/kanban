@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Card\StoreRequest;
 use App\Http\Requests\Card\UpdateRequest;
 use App\Models\Card;
+use App\Models\Column;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -84,6 +85,25 @@ class CardController extends Controller
         try {
             $data = Arr::only($request->validated(), ['title','description']);
             $card->update($data);
+            return $this->updatedResponse($card);
+            
+        } catch (\Exception $ex) {
+            return $this->errorResponse($ex->getMessage(), 422);
+        }
+    }
+    public function updateColumn(Request $request)
+    {
+        $id = $request->id;
+        $column_id = $request->column_id;
+        $card = Card::findOrFail($id);
+
+        if (! Column::find($column_id)) {
+            return $this->errorResponse('Column not found', 404);
+        }
+
+        try {
+            $card->column_id = $column_id;
+            $card->save();
             return $this->updatedResponse($card);
             
         } catch (\Exception $ex) {

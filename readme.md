@@ -11,3 +11,6 @@
 - Run `php artisan db:seed` this will create a user account with email: thenewxpat@gmail.com and password: password
 - Run `php artisan serve` to start the backend service
 
+* Please note: BASIC AND EXPECTED EXCEPTIONS (LIKE MethodNotAllowedHttpException, NotFoundHttpException, ModelNotFoundException) are handled in app/Exceptions/Handler.php
+* Also note: Services and Resource Collection not used because it is a small project
+

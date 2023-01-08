@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ColumnController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Spatie\DbDumper\Databases\MySql;
 
@@ -19,8 +20,10 @@ use Spatie\DbDumper\Databases\MySql;
 */
 
 
-Route::apiResource('columns', ColumnController::class)->only(['index','store']);
+// Route::apiResource('columns', ColumnController::class)->only(['index','store']);
 Route::prefix('columns')->group(function () {
+    Route::get('/', [ColumnController::class, 'index']);
+    Route::post('/', [ColumnController::class, 'store']);
     Route::delete('/', [ColumnController::class, 'destroy']);
 });
 
@@ -28,10 +31,14 @@ Route::prefix('columns')->group(function () {
 
 Route::apiResource('cards', CardController::class)->only(['store','index']);
 Route::prefix('cards')->group(function () {
+    Route::post('/', [CardController::class, 'store']);
+    Route::get('/', [CardController::class, 'index']);
     Route::patch('/', [CardController::class, 'update']);
+    Route::patch('/column', [CardController::class, 'updateColumn']);
     Route::delete('/', [CardController::class, 'delete']);
 });
 Route::get('/list-cards', [CardController::class, 'listCards']);
+
 
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -41,4 +48,10 @@ Route::get('/dump-db', function () {
         ->setUserName(env('DB_USERNAME'))
         ->setPassword(env('DB_PASSWORD'))
         ->dumpToFile('dump.sql');
+});
+
+Route::get('/seed-user', function () {
+    Artisan::call('db:seed', [
+        '--force' => true
+     ]);
 });
