@@ -62,8 +62,8 @@ class CardController extends Controller
     {
         try {
             $data = Arr::only($request->validated(), ['title','column_id','description']);
-            Card::create($data);
-            return $this->createdResponse();
+            $card = Card::create($data);
+            return $this->createdResponse($card);
             
         } catch (\Exception $ex) {
             return $this->errorResponse($ex->getMessage(), 422);

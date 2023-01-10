@@ -2,17 +2,22 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <AddColumn />
+    <ColumnList />
   </div>
 </template>
 
 <script>
 import AddColumn from './components/Column/AddColumn.vue'
+import ColumnList from './components/Column/ColumnList.vue';
+
 
 export default {
   name: 'App',
   components: {
-    AddColumn
+    AddColumn,
+    ColumnList
   }
+  
 }
 </script>
 

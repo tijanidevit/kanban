@@ -1,29 +1,26 @@
 <template>
-    <form @submit.prevent="submitForm">
-      <label for="column">Column:</label>
-      <input v-model="column" type="text" id="column" />
-      <button type="submit">Save</button>
+    <form @submit.prevent="addColumn">
+      <label for="title">Title:</label>
+      <input v-model="title" type="text" id="title" />
+      <button :disabled="isSubmitting || title==='' " type="submit">Save</button>
     </form>
   </template>
   
   <script>
-  import axios from 'axios';
-  import API_URL from './../../constants'
+  import { bus } from '@/main';
   
   export default {
     data() {
       return {
-        column: '',
+        title: '',
+        isSubmitting : false,
       };
     },
     methods: {
-      async submitForm() {
-        try {
-          await axios.post( API_URL, { column: this.column });
-        } catch (error) {
-          console.error(error);
-        }
-      },
+      addColumn (){
+          bus.$emit('addColumn', this.title);
+          this.title = "";
+      }
     },
   };
   </script>

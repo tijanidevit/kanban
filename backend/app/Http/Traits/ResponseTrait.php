@@ -37,14 +37,15 @@ trait ResponseTrait {
             'message' => "Resource deleted successfully",
         ], 200);
     }
-
-    public function createdResponse()
+    public function createdResponse($data=[])
     {
         return response([
             'success' => true,
             'message' => "Resource created successfully",
+            'data' => $data,
         ], 201);
     }
+
 
 
 

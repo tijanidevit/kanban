@@ -43,8 +43,8 @@ class ColumnController extends Controller
     {
         try {
             $data = Arr::only($request->validated(), 'title');
-            Column::create($data);
-            return $this->createdResponse();
+            $column = Column::create($data);
+            return $this->createdResponse($column);
             
         } catch (\Exception $ex) {
             return $this->errorResponse($ex->getMessage(), 422);

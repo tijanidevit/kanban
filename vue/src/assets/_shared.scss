@@ -1,0 +1,50 @@
+
+$main-color: orange;
+$padding: 20px;
+$btn-padding: 10px 20px;
+body{
+    padding: 0px;
+    margin: 0px;
+}
+.kanban-board {
+    background-color: #f5f5f5;
+    padding: $padding;
+  
+    &__column {
+      background-color: white;
+      border: 1px solid $main-color;
+    //   padding: $padding;
+  
+      &--header {
+        background-color: $main-color;
+        color: white;
+        padding: $padding;
+      }
+  
+      &__task {
+        padding: $padding;
+        border-bottom: 1px solid #ccc;
+  
+        &--completed {
+          text-decoration: line-through;
+        }
+  
+        &--in-progress {
+          color: $main-color;
+        }
+      }
+    }
+}
+
+.btn{
+    padding: $btn-padding;
+    color: #f5f5f5;
+}
+
+.btn-dark {
+    background: black;
+}
+
+.move{
+    cursor: move;
+}
