@@ -37,6 +37,7 @@ trait ResponseTrait {
             'message' => "Resource deleted successfully",
         ], 200);
     }
+
     public function createdResponse($data=[])
     {
         return response([
@@ -45,7 +46,6 @@ trait ResponseTrait {
             'data' => $data,
         ], 201);
     }
-
 
 
 

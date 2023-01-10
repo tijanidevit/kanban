@@ -7,6 +7,7 @@
 
             <modal name="editCardModal">
                 <form @submit.prevent="updateCardDetails">
+                    <h4>Edit Card</h4>
                     <div>
                         <label for="title">Title:</label>
                         <input v-model="title" type="text" id="title" />
@@ -14,7 +15,7 @@
                 
                       <div>
                         <label for="description">Description:</label>
-                        <textarea v-model="description" type="text" id="description"></textarea>
+                        <textarea rows="4" v-model="description" type="text" id="description"></textarea>
                       </div>
                       <button class="btn btn-dark" :disabled="isSubmitting || title==='' || description ==='' " type="submit">Save</button>
                 </form>

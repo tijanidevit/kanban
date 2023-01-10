@@ -26,13 +26,12 @@
         },
         methods:{
             addDraggedCard(event){
-                let newColumnId = event.to.getAttribute('column-id');
+                let newColumnId = event.to;
                 let cardId = event.item.children[0].getAttribute('data-id');
                 this.updateCardColum(cardId,newColumnId);
 
             },
             async updateCardColum(id,column_id) {
-                console.log(column_id, id);
                 try {
                     await axios.patch(`${CARD_URL}/column`, { id,column_id });
                     bus.$emit('fetchColumns');

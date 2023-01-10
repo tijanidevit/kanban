@@ -24,7 +24,7 @@ class CardController extends Controller
      */
     public function index()
     {
-        $cards = Card::all();
+        $cards = Card::where('status','1')->get();
         return $this->retrievedResponse($cards);
     }
 

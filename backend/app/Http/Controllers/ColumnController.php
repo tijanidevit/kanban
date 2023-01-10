@@ -29,8 +29,14 @@ class ColumnController extends Controller
 
     public function index()
     {
-        $cards = Column::with('cards')->get();
-        return $this->retrievedResponse($cards); 
+        $columns = Column::with('cards')->get();
+        return $this->retrievedResponse($columns); 
+    }
+
+    public function lists()
+    {
+        $columns = Column::all();
+        return $this->retrievedResponse($columns); 
     }
 
     /**
@@ -58,9 +64,10 @@ class ColumnController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $column = Column::findorFail($request->id);
+        $column = Column::findorFail($id);
+        $column->cards()->update(['status' => '0']);
         $column->delete();
         return $this->deletedResponse();
     }

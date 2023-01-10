@@ -2,7 +2,7 @@
     <div class="kanban-board__column">
         <div class="kanban-board__column--header">
           {{ this.column.title }}
-          <button @click="deleteColumn">Delete</button>
+          <button @click="deleteColumn" class="btn btn-danger">Delete</button>
         </div>
         <CardList :cards="this.column.cards" :column-id="this.column.id" />
     </div>

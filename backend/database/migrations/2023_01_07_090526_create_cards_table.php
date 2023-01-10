@@ -23,7 +23,7 @@ class CreateCardsTable extends Migration
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('column_id')->references('id')->on('columns')->onDelete('cascade');
+            // $table->foreign('column_id')->references('id')->on('columns')->onDelete('cascade');
         });
     }
 

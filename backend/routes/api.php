@@ -23,8 +23,9 @@ use Spatie\DbDumper\Databases\MySql;
 // Route::apiResource('columns', ColumnController::class)->only(['index','store']);
 Route::prefix('columns')->group(function () {
     Route::get('/', [ColumnController::class, 'index']);
+    Route::get('/lists', [ColumnController::class, 'lists']);
     Route::post('/', [ColumnController::class, 'store']);
-    Route::delete('/', [ColumnController::class, 'destroy']);
+    Route::delete('/{id}', [ColumnController::class, 'destroy']);
 });
 
 

@@ -1,6 +1,10 @@
 <template>
   <div class="kanban-board" id="app">
     <img alt="Vue logo"  src="./assets/logo.png">
+
+    <div>
+      <button class="btn btn-dark">Dump DB</button>
+    </div>
     <AddColumn />
     <ColumnList />
   </div>

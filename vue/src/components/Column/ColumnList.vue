@@ -54,7 +54,6 @@ export default {
             try {
                 await axios.post(COLUMN_URL, { title });
                 this.fetchColumns();
-                alert("Column Added Successfully");
             }
             catch (error) {
                 var message = error.response.data.message ;
@@ -65,7 +64,6 @@ export default {
             try {
                 await axios.delete(`${COLUMN_URL}/${ id }`);
                 this.fetchColumns();
-                alert("Column Deleted Successfully");
             }
             catch (error) {
                 var message = error.response.data.message ;
