@@ -20,6 +20,11 @@ body{
         color: white;
         padding: $padding;
       }
+
+      &__form{
+        background-color: red;
+        border: rebeccapurple;
+      }
   
       &__task {
         padding: $padding;
@@ -47,4 +52,13 @@ body{
 
 .move{
     cursor: move;
+}
+
+input, select{
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+.mb-3{
+    margin-bottom: 30px;
 }

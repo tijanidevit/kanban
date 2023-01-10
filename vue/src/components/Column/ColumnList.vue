@@ -1,8 +1,8 @@
 <template>
     
-    <div class="kanban-board">
+    <div >
         <AddCard :columns="this.columns" @cardUpdateColumns="fetchColumns" />
-        <div style="display: flex; justify-content:space-around; border:red 2px">
+        <div style="display: flex;overflow: auto; justify-content:space-around; border:red 2px; flex: 1 0 auto">
             <ColumnCard v-model="columns" v-for="column in columns" :key="column.id" :column="column" />
         </div>
     </div>

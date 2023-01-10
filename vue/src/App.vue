@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+  <div class="kanban-board" id="app">
+    <img alt="Vue logo"  src="./assets/logo.png">
     <AddColumn />
     <ColumnList />
   </div>

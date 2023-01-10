@@ -1,10 +1,10 @@
 <template>
-    <div class="kanban-board__column" >
+    <div class="kanban-board__column">
         <div class="kanban-board__column--header">
           {{ this.column.title }}
           <button @click="deleteColumn">Delete</button>
         </div>
-        <CardList :cards="this.column.cards" />
+        <CardList :cards="this.column.cards" :column-id="this.column.id" />
     </div>
 </template>
   

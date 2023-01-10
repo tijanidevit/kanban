@@ -1,13 +1,13 @@
 <template>
-    <div >
-        <draggable class="kanban-cards" :options="{group: 'cards', handle:'.move'}" >
+        <draggable class="kanban-cards" :options="{group: 'cards', handle:'.move'}" @add="addDraggedCard" >
             <CardItem v-for="card in cards" :key="card.id" :card="card" />
         </draggable>
-    </div>
 </template>
 
 <script>
     import { bus } from '@/main';
+    import { CARD_URL } from '@/constants';
+    import axios from 'axios';
     import draggable from 'vuedraggable';
     import CardItem from './CardItem.vue';
     
@@ -22,12 +22,31 @@
             draggable
         },
         props:{
-            cards: Array
+            cards: Array,
+        },
+        methods:{
+            addDraggedCard(event){
+                let newColumnId = event.to.getAttribute('column-id');
+                let cardId = event.item.children[0].getAttribute('data-id');
+                this.updateCardColum(cardId,newColumnId);
+
+            },
+            async updateCardColum(id,column_id) {
+                console.log(column_id, id);
+                try {
+                    await axios.patch(`${CARD_URL}/column`, { id,column_id });
+                    bus.$emit('fetchColumns');
+                    console.log('newColumnId :>> ', 'newColumnId');
+                }
+                catch (error) {
+                    var message = error.response.data.message ;
+                    alert(message);
+                }
+            }
+
         },
         created(){
-            bus.$on('createCard', (title,description,column_id) => {
-                this.createCard(title,description,column_id);
-            });
+            
         },
         watch: {
             card() {
