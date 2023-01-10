@@ -14,3 +14,7 @@
 * Please note: BASIC AND EXPECTED EXCEPTIONS (LIKE MethodNotAllowedHttpException, NotFoundHttpException, ModelNotFoundException) are handled in app/Exceptions/Handler.php
 * Also note: Services and Resource Collection not used because it is a small project
 
+
+### Forntend (Vue 2) Setup
+- Run `npm install` to install all packages
+- Run `npm run serve` to start using the system

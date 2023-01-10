@@ -27,8 +27,12 @@
 
 
 <script>
+import { CARD_URL } from '@/constants';
+import { bus } from '@/main';
+import axios from 'axios';
 
 export default {
+    
     data(){
         return{
             isSubmitting : false,
@@ -45,6 +49,21 @@ export default {
         hideModal () {
             this.$modal.hide('editCardModal')
         },
+
+        async updateCardDetails(){
+            this.isSubmitting = true;
+            try {
+                await axios.patch(`${CARD_URL}`, { id:this.card.id,title : this.title,description: this.description });
+                bus.$emit('fetchColumns');
+                this.hideModal();
+            }
+            catch (error) {
+                console.log('error :>> ', error);
+                var message = error.response.data.message ;
+                alert(message);
+            }
+            this.isSubmitting = false;
+        }
     },
     props:{
         card:Object 
